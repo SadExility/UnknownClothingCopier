@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Unknown | Roblox Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at center, #2b0000 0%, #120000 40%, #000000 100%);
+    color:#eee;
+}
+
+header{
+    text-align:center;
+    padding:20px;
+    font-size:24px;
+    letter-spacing:2px;
+    font-weight:bold;
+    color:#ff2e2e;
+    text-shadow:0 0 15px #ff0000;
+    border-bottom:1px solid #550000;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    padding:40px 20px;
+}
+
+.card{
+    background:rgba(20,0,0,0.85);
+    border:1px solid #550000;
+    box-shadow:0 0 25px rgba(255,0,0,0.3);
+    backdrop-filter: blur(6px);
+    padding:20px;
+    width:300px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.card:hover{
+    box-shadow:0 0 35px rgba(255,0,0,0.6);
+}
+
+.card h3{
+    text-align:center;
+    color:#ff3c3c;
+}
+
+input{
+    width:100%;
+    padding:8px;
+    margin-top:10px;
+    background:#1a0000;
+    border:1px solid #700000;
+    color:white;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#7a0000;
+    border:none;
+    color:white;
+    font-weight:bold;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#b30000;
+    box-shadow:0 0 15px red;
+}
+
+#previewArea{
+    text-align:center;
+    padding:30px;
+}
+
+#previewArea img{
+    max-width:60%;
+    border:3px solid #600000;
+    border-radius:8px;
+    box-shadow:0 0 25px red;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #550000;
+    color:#aa0000;
+    font-size:14px;
+}
+</style>
+
+<script>
+function getID(value){
+    if(value.toLowerCase().startsWith("http")){
+        let match = value.match(/\/[0-9]{1,}/);
+        return match ? match[0].replaceAll("/", "") : null;
+    }
+    else if(/^[0-9]+$/.test(value)){
+        return value;
+    }
+    return null;
+}
+
+function showClothing(){
+    let id = getID(document.getElementById("clothingInput").value.trim());
+    if(!id) return alert("Invalid ID or URL");
+
+    let preview = document.getElementById("previewArea");
+
+    preview.innerHTML = `
+        <img src="https://assetdelivery.roblox.com/v1/asset/?id=${id}">
+        <p style="margin-top:10px;">Right-click to save image</p>
+    `;
+}
+
+function downloadAsset(inputId){
+    let id = getID(document.getElementById(inputId).value.trim());
+    if(!id) return alert("Invalid ID or URL");
+    window.open("https://assetdelivery.roblox.com/v1/asset/?id=" + id, "_blank");
+}
+</script>
+
+</head>
+<body>
+
+<header>
+🩸 UNKNOWN TOOLS — BLOOD MOON EDITION 🌑
+</header>
+
+<div class="container">
+
+<div class="card">
+<h3>Clothing Downloader</h3>
+<p>Preview classic shirts & pants</p>
+<input id="clothingInput" placeholder="Clothing ID or URL">
+<button onclick="showClothing()">Preview</button>
+</div>
+
+<div class="card">
+<h3>Audio Downloader</h3>
+<p>Download Roblox audio (.ogg)</p>
+<input id="audioInput" placeholder="Audio ID or URL">
+<button onclick="downloadAsset('audioInput')">Download</button>
+</div>
+
+<div class="card">
+<h3>Accessory Downloader</h3>
+<p>Download accessories (.rbxm)</p>
+<input id="accessoryInput" placeholder="Accessory ID or URL">
+<button onclick="downloadAsset('accessoryInput')">Download</button>
+</div>
+
+</div>
+
+<div id="previewArea"></div>
+
+<footer>
+© 2026 Unknown — All rights reserved
+</footer>
+
+</body>
+</html>
